@@ -22,6 +22,10 @@ public class CalculateVacation {
     public double calculateVacation(
             double averageSalary,
             int vacationDays) {
+
+        if (vacationDays <= 0)
+            throw new IllegalArgumentException("Argument vacationDays "+ vacationDays+ " <= 0");
+
         double basicVacationPay = (averageSalary / 12) * vacationDays;
 
         //return Math.round(basicVacationPay * 100.0) / 100.0;
@@ -35,6 +39,9 @@ public class CalculateVacation {
             int vacationDays,
             LocalDate departureDate,
             LocalDate returnDate) {
+        if (vacationDays <= 0)
+            throw new IllegalArgumentException("Argument vacationDays "+ vacationDays+ " <= 0");
+
         double basicVacationPay = (averageSalary / 12) * vacationDays;
 
         double vacationPayWithDates = calculateVacationPayWithDates(
@@ -81,5 +88,17 @@ public class CalculateVacation {
 
     private boolean isHoliday(LocalDate date) {
         return holiday.isContains(date);
+    }
+
+    public  LocalDate addHoliday(LocalDate new_holiday)
+    {
+        holiday.add(new_holiday);
+        return new_holiday;
+    }
+
+    public  LocalDate deleteHoliday(LocalDate old_holiday)
+    {
+        holiday.remove(old_holiday);
+        return old_holiday;
     }
 }

@@ -2,10 +2,7 @@ package com.neoflextest.vacationcalculator;
 
 import com.neoflextest.vacationcalculator.model.CalculateVacation;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -42,5 +39,18 @@ public class CalculateController {
         return cal.calculateVacation(averageSalary, vacationDays,departureDate, returnDate);
     }
 
+    @GetMapping("*/addholiday")
+    public LocalDate addHoliday(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate holidayDate) {
+
+        return cal.addHoliday(holidayDate);
+    }
+
+    @GetMapping("*/deleteholiday")
+    public LocalDate deleteHoliday(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate holidayDate) {
+
+        return cal.deleteHoliday(holidayDate);
+    }
 
 }
